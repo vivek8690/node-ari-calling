@@ -2,7 +2,6 @@
 'use strict';
 
 var ari = require('ari-client');
-var util = require('util');
 
 // following details you can find from /etc/asterisk/ari.conf and /etc/asterisk/http.conf
 ari.connect('<http://IP:port>', '<username>', '<password>', clientLoaded);
@@ -87,7 +86,7 @@ function clientLoaded(err, client) {
 
         console.log(channel.dialplan);
         dialed.originate(
-            { endpoint: `PJSIP/${channel.dialplan.exten}`, app: 'zarniwoop', appArgs: 'dialed', callerId: 'Vivek Prajapati', context: 'ncp' },
+            { endpoint: `PJSIP/${channel.dialplan.exten}`, app: '<app_name>', appArgs: 'dialed', callerId: '<XYZ>', context: '<context>' },
             function (err, dialed) {
                 if (err) {
                     console.log('dialed extension is not registered in asterisk');
@@ -163,5 +162,5 @@ function clientLoaded(err, client) {
 
     client.on('StasisStart', stasisStart);
 
-    client.start('zarniwoop');
+    client.start(<app_name>);
 }
